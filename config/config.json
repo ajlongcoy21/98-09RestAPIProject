@@ -1,0 +1,4 @@
+{
+  "development": { "dialect": "sqlite", "storage": "fsjstd-restapi.db" },
+  "production": { "dialect": "mssql", "connection": { "server"  : "", "userName": "", "password": "", "options": { "encrypt": true, "database": "" }} }
+}
