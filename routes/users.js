@@ -111,7 +111,7 @@ router.post('/api/users', asyncHandler( async (req, res) => {
   {
     // Check if user exists if not create user and add the user to the user table.
     const [user, created] = await User.findOrCreate({
-      where: { emailAddress: userToCreate.emailAddress },
+      where: { emailAddress: (userToCreate.emailAddress) ? userToCreate.emailAddress : ""},
       defaults: 
       {
         firstName: userToCreate.firstName,
