@@ -25,17 +25,26 @@ module.exports = (sequelize) =>
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        validate: {}
+        validate: {
+          notEmpty: {msg: 'Please enter a user ID.' },
+          notNull: { msg: 'Please enter a user ID.' }
+        }
       },
       title: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {}
+        validate: {
+          notEmpty: {msg: 'Please enter a title.' },
+          notNull: { msg: 'Please enter a title.' }
+        }
       },
       description: {
         type: Sequelize.TEXT,
         allowNull: false,
-        validate: { }
+        validate: { 
+          notEmpty: {msg: 'Please enter a description.' },
+          notNull: { msg: 'Please enter a description.' }
+        }
       },
       estimatedTime:
       {

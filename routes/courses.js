@@ -207,12 +207,29 @@ router.post('/api/courses', authenticateUser, asyncHandler( async (req, res) => 
 }));
 
 // /* PUT api/courses/:id route will attempt to update the specified course in the database. */
-router.put('/api/courses/:id', authenticateUser, asyncHandler( async (req, res) => {
+router.put('/api/courses/:id', authenticateUser, [
+  check('title')
+    .exists()
+    .withMessage('Please provide a value for "title"'),
+  check('description')
+    .exists()
+    .withMessage('Please provide a value for "description"')
+], asyncHandler( async (req, res) => {
+
+  // Attempt to get the validation result from the Request object.
+  const errors = validationResult(req);
+
+  // If there are validation errors...
+  if (!errors.isEmpty()) {
+    // Use the Array `map()` method to get a list of error messages.
+    const errorMessages = errors.array().map(error => error.msg);
+
+    // Return the validation errors to the client.
+    return res.status(400).json({ errors: errorMessages });
+  }
 
   // Get the course from the request body.
   const courseToUpdate = req.body;
-  console.log(courseToUpdate);
-  
 
   try 
   {
